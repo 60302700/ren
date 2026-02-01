@@ -138,7 +138,7 @@ export function Home() {
               ease: 'easeInOut',
             }}
           />
-          
+
           {/* Animated Wave Backgrounds */}
           <svg
             className="absolute inset-0 w-full h-full opacity-10"
@@ -149,7 +149,6 @@ export function Home() {
             <motion.path
               fill="#4FAEFF"
               fillOpacity="0.3"
-              d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
               animate={{
                 d: [
                   "M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
@@ -164,7 +163,7 @@ export function Home() {
               }}
             />
           </svg>
-          
+
           <svg
             className="absolute inset-0 w-full h-full opacity-10"
             xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +174,6 @@ export function Home() {
             <motion.path
               fill="#A6D1FF"
               fillOpacity="0.3"
-              d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,170.7C960,139,1056,85,1152,80C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
               animate={{
                 d: [
                   "M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,208C672,213,768,203,864,170.7C960,139,1056,85,1152,80C1248,75,1344,117,1392,138.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
@@ -350,7 +348,7 @@ export function Home() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-60 mix-blend-multiply`} />
-                  
+
                   {/* Icon Overlay */}
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
@@ -365,7 +363,7 @@ export function Home() {
                 <div className="p-8">
                   <h3 className="text-2xl text-gray-900 mb-4">{feature.title}</h3>
                   <p className="text-lg text-gray-600 leading-relaxed mb-6">{feature.description}</p>
-                  
+
                   <motion.button
                     whileHover={{ x: 5 }}
                     className="text-[#4FAEFF] flex items-center gap-2 group/btn"
@@ -454,7 +452,7 @@ export function Home() {
                   const y1 = 50;
                   const x2 = 50 + Math.cos(angle) * 35;
                   const y2 = 50 + Math.sin(angle) * 35;
-                  
+
                   return (
                     <motion.line
                       key={index}
@@ -482,44 +480,44 @@ export function Home() {
 
               {/* Sector Circles */}
               {[
-                { 
-                  title: 'Angel Startups', 
-                  icon: <Rocket className="w-6 h-6" />, 
+                {
+                  title: 'Angel Startups',
+                  icon: <Rocket className="w-6 h-6" />,
                   gradient: 'from-purple-500 to-indigo-600',
                   angle: 0,
                   description: 'Early-stage ventures'
                 },
-                { 
-                  title: 'Agritech', 
-                  icon: <Globe className="w-6 h-6" />, 
+                {
+                  title: 'Agritech',
+                  icon: <Globe className="w-6 h-6" />,
                   gradient: 'from-emerald-500 to-teal-600',
                   angle: 60,
                   description: 'Sustainable farming'
                 },
-                { 
-                  title: 'Fintech', 
-                  icon: <DollarSign className="w-6 h-6" />, 
+                {
+                  title: 'Fintech',
+                  icon: <DollarSign className="w-6 h-6" />,
                   gradient: 'from-amber-500 to-orange-600',
                   angle: 120,
                   description: 'Financial innovation'
                 },
-                { 
-                  title: 'Real Estate', 
-                  icon: <Building2 className="w-6 h-6" />, 
+                {
+                  title: 'Real Estate',
+                  icon: <Building2 className="w-6 h-6" />,
                   gradient: 'from-blue-500 to-cyan-600',
                   angle: 180,
                   description: 'Property development'
                 },
-                { 
-                  title: 'Healthcare', 
-                  icon: <Shield className="w-6 h-6" />, 
+                {
+                  title: 'Healthcare',
+                  icon: <Shield className="w-6 h-6" />,
                   gradient: 'from-rose-500 to-pink-600',
                   angle: 240,
                   description: 'Medical technology'
                 },
-                { 
-                  title: 'Education', 
-                  icon: <Brain className="w-6 h-6" />, 
+                {
+                  title: 'Education',
+                  icon: <Brain className="w-6 h-6" />,
                   gradient: 'from-sky-500 to-blue-600',
                   angle: 300,
                   description: 'Learning platforms'
@@ -757,7 +755,7 @@ export function Home() {
       </section>
 
       {/* Feature Modal */}
-      <FeatureModal 
+      <FeatureModal
         isOpen={selectedFeature !== null}
         onClose={() => setSelectedFeature(null)}
         feature={selectedFeature}

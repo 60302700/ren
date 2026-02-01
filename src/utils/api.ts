@@ -1,7 +1,7 @@
 import { projectId, publicAnonKey } from './supabase/info';
 import { createClient } from '@supabase/supabase-js';
 
-const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-0ae09f59`;
+const API_BASE_URL = `https://${projectId}.supabase.co/functions/v1/server/make-server-0ae09f59`;
 
 // Initialize Supabase client for auth
 const supabase = createClient(
@@ -25,7 +25,7 @@ export async function signUp(email: string, password: string, name: string) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Signup error:', data.error);
       throw new Error(data.error || 'Failed to sign up');
@@ -60,7 +60,7 @@ export async function signIn(email: string, password: string) {
 export async function signOut() {
   try {
     const { error } = await supabase.auth.signOut();
-    
+
     if (error) {
       console.error('Sign out error:', error.message);
       throw new Error(error.message);
@@ -74,7 +74,7 @@ export async function signOut() {
 export async function getSession() {
   try {
     const { data, error } = await supabase.auth.getSession();
-    
+
     if (error) {
       console.error('Get session error:', error.message);
       return null;
@@ -96,7 +96,7 @@ export async function getCurrentUser() {
     }
 
     const { data: { user }, error } = await supabase.auth.getUser();
-    
+
     if (error) {
       // Don't log "Auth session missing!" as an error - it's expected when not logged in
       if (error.message !== 'Auth session missing!') {
@@ -130,7 +130,7 @@ export async function getProfile() {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Get profile error:', data.error);
       throw new Error(data.error || 'Failed to get profile');
@@ -160,7 +160,7 @@ export async function updateProfile(profileData: any) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Update profile error:', data.error);
       throw new Error(data.error || 'Failed to update profile');
@@ -194,7 +194,7 @@ export async function saveBeliefSystem(beliefSystemData: any) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Save belief system error:', data.error);
       throw new Error(data.error || 'Failed to save belief system');
@@ -221,7 +221,7 @@ export async function getBeliefSystem() {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Get belief system error:', data.error);
       throw new Error(data.error || 'Failed to get belief system');
@@ -255,7 +255,7 @@ export async function saveInvestmentPreferences(preferencesData: any) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Save investment preferences error:', data.error);
       throw new Error(data.error || 'Failed to save investment preferences');
@@ -282,7 +282,7 @@ export async function getInvestmentPreferences() {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Get investment preferences error:', data.error);
       throw new Error(data.error || 'Failed to get investment preferences');
@@ -313,7 +313,7 @@ export async function getPortfolio() {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Get portfolio error:', data.error);
       throw new Error(data.error || 'Failed to get portfolio');
@@ -343,7 +343,7 @@ export async function savePortfolio(portfolioData: any) {
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       console.error('Save portfolio error:', data.error);
       throw new Error(data.error || 'Failed to save portfolio');
@@ -370,10 +370,6 @@ export function onAuthStateChange(callback: (session: any) => void) {
 // REGISTRATION INTEREST (Simple Contact Form)
 // ============================================
 
-/**
- * Save registration interest from "Register Now" form
- * This doesn't create a user account - just saves contact info
- */
 export async function saveRegistrationInterest(data: {
   name: string;
   phone: string;
@@ -382,31 +378,28 @@ export async function saveRegistrationInterest(data: {
   timestamp: string;
 }) {
   try {
-    console.log('🌐 Making API call to save registration interest...');
-    console.log('📍 API URL:', `${API_BASE_URL}/registration-interest`);
+    console.log('🌐 Saving registration interest directly to Supabase...');
     console.log('📦 Data:', data);
-    
-    const response = await fetch(`${API_BASE_URL}/registration-interest`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${publicAnonKey}`
-      },
-      body: JSON.stringify(data)
-    });
 
-    console.log('📡 Response status:', response.status);
-    
-    const result = await response.json();
-    console.log('📥 Response data:', result);
-    
-    if (!response.ok) {
-      console.error('❌ Save registration interest error:', result.error);
-      throw new Error(result.error || 'Failed to save registration interest');
+    const { error } = await supabase
+      .from('registrations')
+      .insert([
+        {
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          notes: data.notes,
+          timestamp: data.timestamp,
+        }
+      ]);
+
+    if (error) {
+      console.error('❌ Supabase insert error:', error.message);
+      throw new Error(error.message);
     }
 
     console.log('✅ Registration interest saved successfully');
-    return result;
+    return { success: true };
   } catch (error) {
     console.error('💥 Error in saveRegistrationInterest:', error);
     throw error;

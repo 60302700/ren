@@ -12,7 +12,7 @@ interface RegisterModalProps {
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   console.log('🎨 RegisterModal component rendered! isOpen:', isOpen);
-  
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -25,19 +25,17 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    alert('Form submitted! Check console for logs.');
-    
+
     setIsSubmitting(true);
     setError('');
-    
+
     try {
       console.log('📝 Submitting registration interest:', {
         name: formData.name,
         email: formData.email,
         phone: formData.phone
       });
-      
+
       // Save registration interest to Supabase
       await api.saveRegistrationInterest({
         name: formData.name,
@@ -46,10 +44,10 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         notes: formData.notes,
         timestamp: new Date().toISOString()
       });
-      
+
       console.log('✅ Registration interest saved successfully!');
       setIsSuccess(true);
-      
+
       // Reset after 3 seconds
       setTimeout(() => {
         setIsSuccess(false);
@@ -250,10 +248,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                     transition={{ type: 'spring', stiffness: 200 }}
                     className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full mb-6"
                   >
-                    <motion.svg
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
+                    <svg
                       className="w-10 h-10 text-white"
                       viewBox="0 0 24 24"
                       fill="none"
@@ -261,14 +256,17 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                       strokeWidth="3"
                     >
                       <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
                         d="M5 13l4 4L19 7"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </motion.svg>
+                    </svg>
                   </motion.div>
-                  
-                  <motion.h3 
+
+                  <motion.h3
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
@@ -276,8 +274,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                   >
                     Congratulations!
                   </motion.h3>
-                  
-                  <motion.p 
+
+                  <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
@@ -285,8 +283,8 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                   >
                     Welcome to the <span className="bg-gradient-to-r from-[#4FAEFF] to-[#A6D1FF] bg-clip-text text-transparent font-medium">Tharwa family</span>!
                   </motion.p>
-                  
-                  <motion.p 
+
+                  <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
@@ -294,7 +292,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
                   >
                     We will help you build your account ASAP.
                   </motion.p>
-                  
+
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
